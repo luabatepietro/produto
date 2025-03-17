@@ -6,6 +6,15 @@ public class Produto {
     private Float preco;
     private Integer estoque;
 
+    public Produto(String nome, float valor){
+        this.nome = nome;
+        this.preco = valor;
+    }
+
+    public Produto(){
+
+    }
+
     public String getId() { return id; }
 
     public void setId(String id) { this.id = id; }

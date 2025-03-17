@@ -137,4 +137,6 @@ public class ProdutoServiceTests {
 
         Assertions.assertEquals(produto1, produto2);
     }
+
+    //acabou!
 }

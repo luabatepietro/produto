@@ -1,13 +1,10 @@
 package br.insper.produto.produto;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -15,32 +12,26 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public List<Produto> getProdutos() {
+    public Produto criarProduto(Produto produto) {
+        return produtoRepository.save(produto);
+    }
+
+    public Optional<Produto> buscarPorId(String id) {
+        return produtoRepository.findById(id);
+    }
+
+    public List<Produto> listarTodos() {
         return produtoRepository.findAll();
     }
 
-    public RetornarProdutoDTO cadastrarProduto(CadastraProdutoDTO dto) {
-
-        Produto produto = new Produto();
-        produto.setNome(dto.nome());
-        produto.setPreco(dto.preco());
-        produto.setEstoque(dto.estoque());
-
-        produto = produtoRepository.save(produto);
-        return new RetornarProdutoDTO(produto.getId(), produto.getNome(), produto.getPreco(), produto.getEstoque());
+    public Produto diminuirEstoque(String id, int quantidade) {
+        Optional<Produto> produtoOpt = produtoRepository.findById(id);
+        if (produtoOpt.isPresent()) {
+            Produto produto = produtoOpt.get();
+            produto.diminuirEstoque(quantidade);
+            return produtoRepository.save(produto);
+        } else {
+            throw new RuntimeException("Produto não encontrado.");
+        }
     }
-
-    public Produto buscarProduto(String id) {
-        return produtoRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-    public RetornarProdutoDTO diminuirEstoqueProduto(String id) {
-        Produto produto = buscarProduto(id);
-        produto.setEstoque(produto.getEstoque() - 1);
-
-        produto = produtoRepository.save(produto);
-        return new RetornarProdutoDTO(produto.getId(), produto.getNome(), produto.getPreco(), produto.getEstoque());
-    }
-
 }

@@ -30,13 +30,6 @@ public class ProdutoService {
         return new RetornarProdutoDTO(produto.getId(), produto.getNome(), produto.getPreco(), produto.getEstoque());
     }
 
-    public Page<Produto> listarProdutos(String nome, Pageable pageable) {
-        if (nome != null) {
-            return produtoRepository.findByNome(nome, pageable);
-        }
-        return produtoRepository.findAll(pageable);
-    }
-
     public Produto buscarProduto(String id) {
         return produtoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Produto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">produto</a> &gt; <a href="index.source.html" class="el_package">br.insper.produto.produto</a> &gt; <span class="el_source">Produto.java</span></div><h1>Produto.java</h1><pre class="source lang-java linenums">package br.insper.produto.produto;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = &quot;produtos&quot;)
+public class Produto {
+
+    private String id;
+    private String nome;
+    private double preco;
+    private int quantidadeEstoque;
+
+<span class="fc" id="L13">    public Produto(String id, String nome, double preco, int quantidadeEstoque) {</span>
+<span class="fc" id="L14">        this.id = id;</span>
+<span class="fc" id="L15">        this.nome = nome;</span>
+<span class="fc" id="L16">        this.preco = preco;</span>
+<span class="fc" id="L17">        this.quantidadeEstoque = quantidadeEstoque;</span>
+<span class="fc" id="L18">    }</span>
+
+<span class="fc" id="L20">    public Produto() {</span>
+<span class="fc" id="L21">    }</span>
+
+    public String getId() {
+<span class="fc" id="L24">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L28">        this.id = id;</span>
+<span class="fc" id="L29">    }</span>
+
+    public String getNome() {
+<span class="fc" id="L32">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="fc" id="L36">        this.nome = nome;</span>
+<span class="fc" id="L37">    }</span>
+
+    public double getPreco() {
+<span class="fc" id="L40">        return preco;</span>
+    }
+
+    public void setPreco(double preco) {
+<span class="fc" id="L44">        this.preco = preco;</span>
+<span class="fc" id="L45">    }</span>
+
+    public int getQuantidadeEstoque() {
+<span class="fc" id="L48">        return quantidadeEstoque;</span>
+    }
+
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+<span class="fc" id="L52">        this.quantidadeEstoque = quantidadeEstoque;</span>
+<span class="fc" id="L53">    }</span>
+
+    public void diminuirEstoque(int quantidade) {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (this.quantidadeEstoque &gt;= quantidade) {</span>
+<span class="fc" id="L57">            this.quantidadeEstoque -= quantidade;</span>
+        } else {
+<span class="fc" id="L59">            throw new IllegalArgumentException(&quot;Quantidade em estoque insuficiente.&quot;);</span>
+        }
+<span class="fc" id="L61">    }</span>
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (this == obj) return true;</span>
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">        if (obj == null || getClass() != obj.getClass()) return false;</span>
+<span class="fc" id="L67">        Produto produto = (Produto) obj;</span>
+<span class="pc bpc" id="L68" title="2 of 4 branches missed.">        return id != null &amp;&amp; id.equals(produto.id);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

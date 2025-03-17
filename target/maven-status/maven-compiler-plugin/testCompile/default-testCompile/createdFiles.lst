@@ -1,2 +1,2 @@
-br\insper\iam\produto\controller\produtoControllerTeste.class
-br\insper\iam\produto\service\produtoServiceTeste.class
+br\insper\iam\produto\controller\ProdutoControllerTests.class
+br\insper\iam\produto\service\ProdutoServiceTests.class
